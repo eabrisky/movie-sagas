@@ -1,13 +1,18 @@
 MOVIELIST
 
-[] grab movie id on click
-    [] handleClick fn to send user to details page
+[x] grab movie id on click
+    [x] handleClick fn to send user to details page
+    [x] dispatch movie to rootSaga
+
+INDEX
+[x] call fn*
+    [x] send action.payload to movie reducer (yield put)
+    [] save response from axios.get in genre.router.js
+    [] send response.data to genre reducer (yield put)
 
 DETAILS
 
-[] display movie that was clicked on this page
-    [] how to keep track of movie that was clicked between pages?
-        [] id?
+[x] display movie that was clicked on this page
 [] display all genres that apply to movie
     [] store data in redux
 
