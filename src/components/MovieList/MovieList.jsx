@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
-import { HashRouter as Router, Route, Link } from 'react-router-dom';
+import { HashRouter as Router, Route, Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import './MovieList.css';
 import Details from '../Details/Details.jsx';
 
 function MovieList() {
 
+    const history = useHistory();
     const dispatch = useDispatch();
     const movies = useSelector(store => store.movies);
 
@@ -16,6 +17,9 @@ function MovieList() {
     const handleClick = () => {
 
         console.log('in handleClick');
+
+        // navigate user to '/details' page
+        history.push('/details');
 
     } // end handleClick
 
@@ -31,7 +35,7 @@ function MovieList() {
 
                             <div key={movie.id} >
                                 <h3>{movie.title}</h3>
-                                <img src={movie.poster} alt={movie.title} onClick={handleClick()}/>
+                                <img src={movie.poster} alt={movie.title} onClick={handleClick}/>
                             </div>
 
                         );

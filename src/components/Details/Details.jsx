@@ -1,16 +1,33 @@
-import { HashRouter as Router, Route, Link } from 'react-router-dom';
+import { HashRouter as Router, Route, Link, useHistory } from 'react-router-dom';
 
 function Details() {
 
-    return(
+    const history = useHistory();
 
-        <section className="details">
+    const handleClick = () => {
 
-            <p> in Details </p>
+        // navigate user to '/' list page
+        history.push('/');
 
-        </section>
+    } // end handleClick
 
-    )
+    return (
+        <div>
+
+            <section className="details">
+
+                <p> in Details </p>
+
+            </section>
+
+            <div>
+                <button onClick={handleClick}>Back To List</button>
+            </div>
+
+        </div>
+
+
+    ) // end return
 
 } // end Details fn
 
