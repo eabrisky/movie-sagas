@@ -18,21 +18,51 @@ const sagaMiddleware = createSagaMiddleware();
 function* rootSaga() {
 
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
+    yield takeEvery('GET_DETAILS', getDetails);
 
 } // end rootSaga
 
 function* fetchAllMovies() {
     // get all movies from the DB
     try {
+
         const movies = yield axios.get('/api/movie');
         console.log('get all:', movies.data);
         yield put({ type: 'SET_MOVIES', payload: movies.data });
 
-    } catch {
+    } // end try
+    
+    catch {
+
         console.log('get all error');
-    }
+
+    } // end catch
 
 } // end fetchAllMovies fn*
+
+function* getDetails(action) {
+
+    try {
+
+        // axios.get for genre
+        // const response = yield axios.get('/api/genre');
+        console.log('get details gen fn (action.payload):', action.payload);
+        // yield put({
+
+        //     type : 
+            
+        // })
+        
+
+    } // end try
+    
+    catch (err) {
+
+        console.log('get details error:', err);
+        
+    } // end catch
+
+} // end getDetails fn*
 
 // Used to store movies returned from the server
 const movies = (state = [], action) => {

@@ -1,4 +1,4 @@
-import { HashRouter as Router, Route, Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 function Details() {
 
