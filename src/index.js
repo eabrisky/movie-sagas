@@ -51,7 +51,8 @@ function* getDetails(action) {
         console.log('(in getDetails fn*) movie received from MovieList dispatch: ', action.payload);
 
         // axios.get for genre
-        // const response = yield axios.get('/api/genre');
+        // const response = yield axios.get('/api/genre/{action.payload.id}');
+        yield axios.get('/api/genre/:id');
 
         // console.log('(in getDetails fn*) get details from genre get(response.data):', response.data);
 
