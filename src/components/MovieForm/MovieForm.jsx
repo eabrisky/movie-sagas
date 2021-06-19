@@ -18,6 +18,8 @@
     // bring user to the home/list page
     // which now has the new movie
 
+import { HashRouter as Router, Route, Link } from 'react-router-dom';
+
 function MovieForm() {
 
     const handleSubmit = () => {

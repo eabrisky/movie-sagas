@@ -1,3 +1,5 @@
+import { HashRouter as Router, Route, Link } from 'react-router-dom';
+
 function Details() {
 
     return(
