@@ -46,6 +46,8 @@ function MovieList() {
                                 <img src={movie.poster} alt={movie.title} onClick={() => handleClick(movie)}/>
                                 {/* pass handleClick as anonymous fn to prevent infinite loop */}
                                 {/* otherwise, it'll execute the function instead of just calling it */}
+                                <p>{movie.description}</p>
+                                {/* add movie description to each movie */}
                             </div>
 
                         );

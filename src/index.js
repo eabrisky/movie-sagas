@@ -28,7 +28,11 @@ function* fetchAllMovies() {
 
         const movies = yield axios.get('/api/movie');
         console.log('get all:', movies.data);
-        yield put({ type: 'SET_MOVIES', payload: movies.data });
+
+        yield put({ 
+            type : 'SET_MOVIES',
+            payload : movies.data
+        });
 
     } // end try
     
@@ -44,15 +48,24 @@ function* getDetails(action) {
 
     try {
 
+        console.log('(in getDetails fn*) movie received from MovieList dispatch: ', action.payload);
+
         // axios.get for genre
         // const response = yield axios.get('/api/genre');
-        console.log('get details gen fn (action.payload):', action.payload);
-        // yield put({
 
-        //     type : 
-            
-        // })
-        
+        // console.log('(in getDetails fn*) get details from genre get(response.data):', response.data);
+
+        // yield put to genre reducer
+        // yield put({
+        //     type : 'SET_GENRE',
+        //     payload : response.data
+        // }) // end genre yield put
+
+        // yield put to movie reducer
+        yield put({
+            type : 'SET_MOVIE',
+            payload : action.payload
+        }) // end movie yield put
 
     } // end try
     
@@ -63,6 +76,28 @@ function* getDetails(action) {
     } // end catch
 
 } // end getDetails fn*
+
+const movie = (state = [], action) => {
+    
+    switch (action.type) {
+        case 'SET_MOVIE':
+            return action.payload;
+        default:
+            return state;
+    } // end switch
+
+} // end movie reducer
+
+const genre = (state = [], action) => {
+
+    switch (action.type) {
+        case 'SET_GENRE':
+            return action.payload;
+        default:
+            return state;
+    } // end switch
+
+} // end genre reducer
 
 // Used to store movies returned from the server
 const movies = (state = [], action) => {
@@ -92,6 +127,8 @@ const genres = (state = [], action) => {
 const storeInstance = createStore(
 
     combineReducers({
+        movie,
+        genre,
         movies,
         genres
     }),
