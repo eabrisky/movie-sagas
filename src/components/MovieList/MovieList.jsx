@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
+import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import './MovieList.css'
+import './MovieList.css';
+import Details from '../Details/Details.jsx';
 
 function MovieList() {
 
@@ -11,23 +13,33 @@ function MovieList() {
         dispatch({ type: 'FETCH_MOVIES' });
     }, []);
 
+    const handleClick = () => {
+
+        console.log('in handleClick');
+
+    } // end handleClick
+
     return (
 
-        <main>
-            <h1>MovieList</h1>
-            <section className="movies">
-                {movies.map(movie => {
-                    return (
+        <div>
 
-                        <div key={movie.id} >
-                            <h3>{movie.title}</h3>
-                            <img src={movie.poster} alt={movie.title}/>
-                        </div>
+            <main>
+                <h1>MovieList</h1>
+                <section className="movies">
+                    {movies.map(movie => {
+                        return (
 
-                    );
-                })}
-            </section>
-        </main>
+                            <div key={movie.id} >
+                                <h3>{movie.title}</h3>
+                                <img src={movie.poster} alt={movie.title} onClick={handleClick()}/>
+                            </div>
+
+                        );
+                    })}
+                </section>
+            </main>
+
+        </div>
 
     ); // end return
 
