@@ -1,6 +1,17 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+      '& .MuiTextField-root': {
+        margin: theme.spacing(1),
+        width: '25ch',
+      },
+    },
+  }));
 
 function Details() {
 
@@ -29,6 +40,9 @@ function Details() {
 
     } // end handleClick
 
+    // button
+    const classes = useStyles();
+
     return (
 
         <div>
@@ -39,8 +53,8 @@ function Details() {
 
                     return (
 
-                        <div>
-                            <h2 key={i}>{genre?.title}</h2>
+                        <div key={i}>
+                            <h2>{genre?.title}</h2>
                             <img src={genre?.poster} alt={genre?.title} />
                             <p>{genre?.description}</p>
                             <h3>Genre(s)</h3>
@@ -53,8 +67,8 @@ function Details() {
 
             </section>
 
-            <div>
-                <button onClick={handleClick}>Back To List</button>
+            <div className={classes.root}>
+                <Button variant="outlined" color="primary" onClick={handleClick}>Back To List</Button>
             </div>
 
         </div>

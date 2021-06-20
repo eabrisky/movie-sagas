@@ -2,6 +2,17 @@ import React, { useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import './MovieList.css';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+      '& .MuiTextField-root': {
+        margin: theme.spacing(1),
+        width: '25ch',
+      },
+    },
+  }));
 
 function MovieList() {
 
@@ -34,9 +45,16 @@ function MovieList() {
         history.push('/movieform');
     } // end goToForm
 
+    // button
+    const classes = useStyles();
+
     return (
 
         <div>
+
+            <div className={classes.root}>
+                <Button variant="outlined" color="primary" onClick={goToForm}>Add Movie</Button>
+            </div>
 
             <main>
                 <h1>MovieList</h1>
@@ -58,10 +76,6 @@ function MovieList() {
                     })}
                 </section>
             </main>
-
-            <div>
-                <button onClick={goToForm}>Add A Movie!</button>
-            </div>
 
         </div>
 
