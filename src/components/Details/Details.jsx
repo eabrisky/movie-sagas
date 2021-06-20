@@ -4,19 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function Details() {
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const history = useHistory();
 
-    const movie = useSelector(store => store.movie);
     const genres = useSelector(store => store.genres);
-
-    // console.log(movie);
-    // id
-    // title
-    // image
-    // description
-    
-    console.log(genres);
 
     // useEffect to keep movie details persisting on page refresh
     // useEffect(() => {
@@ -39,29 +30,26 @@ function Details() {
     } // end handleClick
 
     return (
+
         <div>
 
             <section className="movieDetails">
 
-                <h3>{movie.title}</h3>
-                <img src={movie.poster} alt={movie.title} />
-                <p>{movie.description}</p>
+                {genres?.map((genre, i) => {
 
-            </section>
+                    return (
 
-            <section className="genreDetails">
+                        <div>
+                            <h2 key={i}>{genre?.title}</h2>
+                            <img src={genre?.poster} alt={genre?.title} />
+                            <p>{genre?.description}</p>
+                            <h3>Genre(s)</h3>
+                            <p>{genre?.genre}</p>
+                        </div>
 
-                <h2>Genre(s)</h2>
+                    )
 
-                <div>
-                    {genres.map((genre, i) => {
-
-                        return (
-                            <p key={i} className="genreList">{genre.genre}</p>
-                        ) // end sub-return
-
-                    })}
-                </div>
+                })}
 
             </section>
 
@@ -70,7 +58,6 @@ function Details() {
             </div>
 
         </div>
-
 
     ) // end return
 
