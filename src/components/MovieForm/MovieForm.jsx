@@ -25,30 +25,52 @@ function MovieForm() {
     const dispatch = useDispatch();
 
     const [ newMovie, setNewMovie ] = useState('');
+    const [ newMovieTitle, setNewMovieTitle ] = useState('');
+    const [ newMoviePoster, setNewMoviePoster ] = useState('');
+    const [ newMovieDescription, setNewMovieDescription ] = useState('');
 
-    const handleSubmit = () => {
-        
-        //dispatch to rootSaga with payload of local state (as object)
-        dispatch({
-
-            type: 'ADD_NEW_MOVIE',
-            payload: newMovie
-
-        }) // end dispatch
-        setNewMovie('');
-
-    } // end handleSubmit fn
-
-    const handleChange = (event) => {
+    const handleSubmit = (event) => {
 
         event.preventDefault();
-        //change state to event.target.value
-        setNewMovie(event.target.value);
 
-    } // end handleChange
+        console.log(newMovieTitle);
+        console.log(newMoviePoster);
+        console.log(newMovieDescription);
+        
+        //dispatch to rootSaga with payload of local state (as object)
+        // dispatch({
+
+        //     type: 'ADD_NEW_MOVIE',
+        //     payload: newMovie
+
+        // }) // end dispatch
+
+        // setNewMovie('');
+        setNewMovieTitle('');
+        setNewMoviePoster('');
+        setNewMovieDescription('');
+
+    } // end handleSubmit
+
+    const handleChangeTitle = (event) => {
+        event.preventDefault();
+        //change state to event.target.value
+        setNewMovieTitle(event.target.value);
+    } // end handleChangeTitle
+
+    const handleChangePoster = (event) => {
+        event.preventDefault();
+        setNewMoviePoster(event.target.value);
+    } // end handleChangePoster
+
+    const handleChangeDescription = (event) => {
+        event.preventDefault();
+        setNewMovieDescription(event.target.value);
+    } // end handleChangeDescription
 
     const handleCancel = () => {
-        setNewMovie('');
+        // clear form
+        // setNewMovieTitle('');
     } // end handleCancel
 
     return(
@@ -56,7 +78,9 @@ function MovieForm() {
         <section className="formSection">
 
             <form className="form" onSubmit={handleSubmit}>
-                <input onChange={handleChange} placeholder="Movie Title Here..." value={newMovie}/>
+                <input required onChange={handleChangeTitle} placeholder="Movie Title Here..." value={newMovieTitle} />
+                <input required onChange={handleChangePoster} placeholder="Movie Poster URL Here..." value={newMoviePoster} />
+                <input required onChange={handleChangeDescription} placeholder="Movie Description Here..." value={newMovieDescription} />
                 <button onClick={handleCancel}>Cancel</button>
                 <button type="submit">Save</button>
             </form>
