@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import { HashRouter as Router, Route, Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import './MovieList.css';
-import Details from '../Details/Details.jsx';
 
 function MovieList() {
 
+    const history = useHistory();
     const dispatch = useDispatch();
     const movies = useSelector(store => store.movies);
 
@@ -13,9 +13,20 @@ function MovieList() {
         dispatch({ type: 'FETCH_MOVIES' });
     }, []);
 
-    const handleClick = () => {
+    const handleClick = (movie) => {
 
-        console.log('in handleClick');
+        console.log(movie);
+
+        // dispatch to rootSaga, send clicked movie as payload
+        dispatch({
+
+            type: 'GET_DETAILS',
+            payload: movie
+
+        }) // end dispatch
+
+        // navigate user to '/details' page
+        history.push('/details');
 
     } // end handleClick
 
@@ -31,13 +42,22 @@ function MovieList() {
 
                             <div key={movie.id} >
                                 <h3>{movie.title}</h3>
-                                <img src={movie.poster} alt={movie.title} onClick={handleClick()}/>
+                                {/* on click, handleClick fn and pass movie */}
+                                <img src={movie.poster} alt={movie.title} onClick={() => handleClick(movie)} />
+                                {/* pass handleClick as anonymous fn to prevent infinite loop */}
+                                {/* otherwise, it'll execute the function instead of just calling it */}
+                                <p>{movie.description}</p>
+                                {/* add movie description to each movie */}
                             </div>
 
                         );
                     })}
                 </section>
             </main>
+
+            <nav>
+
+            </nav>
 
         </div>
 

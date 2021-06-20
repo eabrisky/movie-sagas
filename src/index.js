@@ -18,21 +18,58 @@ const sagaMiddleware = createSagaMiddleware();
 function* rootSaga() {
 
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
+    yield takeEvery('GET_DETAILS', getDetails);
 
 } // end rootSaga
 
 function* fetchAllMovies() {
     // get all movies from the DB
     try {
+
         const movies = yield axios.get('/api/movie');
         console.log('get all:', movies.data);
-        yield put({ type: 'SET_MOVIES', payload: movies.data });
 
-    } catch {
+        yield put({
+            type: 'SET_MOVIES',
+            payload: movies.data
+        });
+
+    } // end try
+
+    catch {
+
         console.log('get all error');
-    }
+
+    } // end catch
 
 } // end fetchAllMovies fn*
+
+function* getDetails(action) {
+
+    try {
+
+        console.log('(in getDetails fn*) movie received from MovieList dispatch: ', action.payload);
+
+        // axios.get for genre
+        const response = yield axios.get(`/api/genre/${action.payload.id}`);
+
+        console.log('(in getDetails fn*) get details from genre get(response.data):', response.data);
+
+        // yield put to genre reducer
+        yield put({
+            type: 'SET_GENRES',
+            payload: response.data
+        }) // end genre yield put
+
+    } // end try
+
+    catch (err) {
+
+        console.log('get details error:', err);
+
+    } // end catch
+
+} // end getDetails fn*
 
 // Used to store movies returned from the server
 const movies = (state = [], action) => {
@@ -65,10 +102,14 @@ const storeInstance = createStore(
         movies,
         genres
     }),
-    // Add sagaMiddleware to our store
-    applyMiddleware(sagaMiddleware, logger)
 
-);
+    // Add sagaMiddleware to our store
+    applyMiddleware(
+        sagaMiddleware,
+        logger
+    )
+
+); // end storeInstance
 
 // Pass rootSaga into our sagaMiddleware
 sagaMiddleware.run(rootSaga);
