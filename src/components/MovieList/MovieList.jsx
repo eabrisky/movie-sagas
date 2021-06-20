@@ -30,6 +30,10 @@ function MovieList() {
 
     } // end handleClick
 
+    const goToForm = () => {
+        history.push('/movieform');
+    } // end goToForm
+
     return (
 
         <div>
@@ -55,9 +59,9 @@ function MovieList() {
                 </section>
             </main>
 
-            <nav>
-
-            </nav>
+            <div>
+                <button onClick={goToForm}>Add A Movie!</button>
+            </div>
 
         </div>
 
