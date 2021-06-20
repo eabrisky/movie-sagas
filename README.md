@@ -6,4 +6,12 @@
 
 Your project description goes here. What problem did you solve? How did you solve it?
 
+## Installs
+
+npm install
+npm install redux react-redux redux-logger react-router-dom dotenv @material-ui/core redux-saga
+brew services start postgres
+npm run server
+npm run client
+
 Additional README details can be found [here](https://github.com/PrimeAcademy/readme-template/blob/master/README.md).
