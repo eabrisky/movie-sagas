@@ -52,7 +52,7 @@ function MovieForm() {
         title: newMovieTitle,
         poster: newMoviePoster,
         description: newMovieDescription,
-        genre: newMovieGenre
+        genre_id: newMovieGenre
     };
 
     const handleSubmit = (event) => {
@@ -134,9 +134,9 @@ function MovieForm() {
             <form onSubmit={handleSubmit} className={classes.root} noValidate autoComplete="off">
 
                 {/* title */}
-                <TextField required={true} id="standard-basic" label="title" onChange={handleChangeTitle} />
+                <TextField required={true} id="standard-basic" label="title" onChange={handleChangeTitle} value={newMovieTitle}/>
                 {/* poster url */}
-                <TextField required={true} id="standard-basic" label="poster url" onChange={handleChangePoster} />
+                <TextField required={true} id="standard-basic" label="poster url" onChange={handleChangePoster} value={newMoviePoster}/>
                 {/* description */}
                 <TextField
                     required={true}
@@ -145,6 +145,7 @@ function MovieForm() {
                     multiline
                     rowsMax={4}
                     onChange={handleChangeDescription}
+                    value={newMovieDescription}
                 />
 
                 {/* genre */}
