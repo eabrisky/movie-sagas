@@ -29,13 +29,13 @@ function* fetchAllMovies() {
         const movies = yield axios.get('/api/movie');
         console.log('get all:', movies.data);
 
-        yield put({ 
-            type : 'SET_MOVIES',
-            payload : movies.data
+        yield put({
+            type: 'SET_MOVIES',
+            payload: movies.data
         });
 
     } // end try
-    
+
     catch {
 
         console.log('get all error');
@@ -57,47 +57,19 @@ function* getDetails(action) {
 
         // yield put to genre reducer
         yield put({
-            type : 'SET_GENRES',
-            payload : response.data
+            type: 'SET_GENRES',
+            payload: response.data
         }) // end genre yield put
 
-        // yield put to movie reducer
-        yield put({
-            type : 'SET_MOVIE',
-            payload : action.payload
-        }) // end movie yield put
-
     } // end try
-    
+
     catch (err) {
 
         console.log('get details error:', err);
-        
+
     } // end catch
 
 } // end getDetails fn*
-
-const movie = (state = [], action) => {
-    
-    switch (action.type) {
-        case 'SET_MOVIE':
-            return action.payload;
-        default:
-            return state;
-    } // end switch
-
-} // end movie reducer
-
-// const genre = (state = [], action) => {
-
-//     switch (action.type) {
-//         case 'SET_GENRE':
-//             return action.payload;
-//         default:
-//             return state;
-//     } // end switch
-
-// } // end genre reducer
 
 // Used to store movies returned from the server
 const movies = (state = [], action) => {
@@ -127,15 +99,17 @@ const genres = (state = [], action) => {
 const storeInstance = createStore(
 
     combineReducers({
-        movie,
-        // genre,
         movies,
         genres
     }),
-    // Add sagaMiddleware to our store
-    applyMiddleware(sagaMiddleware, logger)
 
-);
+    // Add sagaMiddleware to our store
+    applyMiddleware(
+        sagaMiddleware,
+        logger
+    )
+
+); // end storeInstance
 
 // Pass rootSaga into our sagaMiddleware
 sagaMiddleware.run(rootSaga);

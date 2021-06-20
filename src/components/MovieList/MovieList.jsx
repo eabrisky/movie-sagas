@@ -20,8 +20,8 @@ function MovieList() {
         // dispatch to rootSaga, send clicked movie as payload
         dispatch({
 
-            type : 'GET_DETAILS',
-            payload : movie
+            type: 'GET_DETAILS',
+            payload: movie
 
         }) // end dispatch
 
@@ -43,7 +43,7 @@ function MovieList() {
                             <div key={movie.id} >
                                 <h3>{movie.title}</h3>
                                 {/* on click, handleClick fn and pass movie */}
-                                <img src={movie.poster} alt={movie.title} onClick={() => handleClick(movie)}/>
+                                <img src={movie.poster} alt={movie.title} onClick={() => handleClick(movie)} />
                                 {/* pass handleClick as anonymous fn to prevent infinite loop */}
                                 {/* otherwise, it'll execute the function instead of just calling it */}
                                 <p>{movie.description}</p>
