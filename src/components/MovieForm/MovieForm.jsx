@@ -56,7 +56,7 @@ function MovieForm() {
         <section className="formSection">
 
             <form className="form" onSubmit={handleSubmit}>
-                <input onChange={handleChange} placeholder="movie stuff 🥴" value={newMovie}/>
+                <input onChange={handleChange} placeholder="Movie Title Here..." value={newMovie}/>
                 <button onClick={handleCancel}>Cancel</button>
                 <button type="submit">Save</button>
             </form>

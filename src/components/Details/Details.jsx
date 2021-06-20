@@ -39,8 +39,8 @@ function Details() {
 
                     return (
 
-                        <div>
-                            <h2 key={i}>{genre?.title}</h2>
+                        <div key={i}>
+                            <h2>{genre?.title}</h2>
                             <img src={genre?.poster} alt={genre?.title} />
                             <p>{genre?.description}</p>
                             <h3>Genre(s)</h3>
