@@ -8,12 +8,12 @@ import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      '& .MuiTextField-root': {
-        margin: theme.spacing(1),
-        width: '25ch',
-      },
+        '& .MuiTextField-root': {
+            margin: theme.spacing(1),
+            width: '25ch',
+        },
     },
-  }));
+}));
 
 // drop-down menu from material-ui
 import Button from '@material-ui/core/Button';
@@ -46,7 +46,7 @@ function MovieForm() {
     const [newMovieTitle, setNewMovieTitle] = useState('');
     const [newMoviePoster, setNewMoviePoster] = useState('');
     const [newMovieDescription, setNewMovieDescription] = useState('');
-    const [newMovieGenre, setNewMovieGenre] = useState('');
+    const [newMovieGenre, setNewMovieGenre] = useState(0);
 
     const newMovie = {
         title: newMovieTitle,
@@ -64,6 +64,8 @@ function MovieForm() {
         console.log(newMovieDescription);
         console.log(newMovieGenre);
 
+        console.log(newMovie);
+
         //dispatch to rootSaga with payload of local state (as object)
         dispatch({
 
@@ -78,33 +80,38 @@ function MovieForm() {
         setNewMovieDescription('');
         setNewMovieGenre('');
 
-    } // end handleSubmit
+    }; // end handleSubmit
 
     const handleChangeTitle = (event) => {
         event.preventDefault();
         //change state to event.target.value
         setNewMovieTitle(event.target.value);
-    } // end handleChangeTitle
+    }; // end handleChangeTitle
 
     const handleChangePoster = (event) => {
         event.preventDefault();
         setNewMoviePoster(event.target.value);
-    } // end handleChangePoster
+    }; // end handleChangePoster
 
     const handleChangeDescription = (event) => {
         event.preventDefault();
         setNewMovieDescription(event.target.value);
-    } // end handleChangeDescription
+    }; // end handleChangeDescription
 
     const handleChangeGenre = (event) => {
         setNewMovieGenre(event.target.value);
         setAnchorEl(null);
-      };
+    }; // end handleChangeGenre
 
     const handleCancel = () => {
         // navigate user back to '/' list page
         history.push('/');
-    } // end handleCancel
+    }; // end handleCancel
+
+    const goHome = () => {
+        // navigate user back to '/' list page
+        history.push('/');
+    } // end goHome
 
     // inputs
     const classes = useStyles();
@@ -116,9 +123,9 @@ function MovieForm() {
         setAnchorEl(event.currentTarget);
     };
 
-    const handleClose = () => {
+    const handleChange = () => {
         setAnchorEl(null);
-    }
+    };
 
     return (
 
@@ -150,27 +157,34 @@ function MovieForm() {
                         anchorEl={anchorEl}
                         keepMounted
                         open={Boolean(anchorEl)}
-                        onClose={handleClose}
+                        onClose={handleChange}
                     >
-                        <MenuItem onClick={handleChangeGenre} value="Adventure">Adventure</MenuItem>
-                        <MenuItem onClick={handleChangeGenre}>Animated</MenuItem>
-                        <MenuItem onClick={handleChangeGenre}>Biographical</MenuItem>
-                        <MenuItem onClick={handleChangeGenre}>Comedy</MenuItem>
-                        <MenuItem onClick={handleChangeGenre}>Disaster</MenuItem>
-                        <MenuItem onClick={handleChangeGenre}>Drama</MenuItem>
-                        <MenuItem onClick={handleChangeGenre}>Epic</MenuItem>
-                        <MenuItem onClick={handleChangeGenre}>Fantasy</MenuItem>
-                        <MenuItem onClick={handleChangeGenre}>Musical</MenuItem>
-                        <MenuItem onClick={handleChangeGenre}>Romantic</MenuItem>
-                        <MenuItem onClick={handleChangeGenre}>Science Fiction</MenuItem>
-                        <MenuItem onClick={handleChangeGenre}>Space-Opera</MenuItem>
-                        <MenuItem onClick={handleChangeGenre}>Superhero</MenuItem>
+                        <MenuItem onClick={handleChangeGenre} value="1">Adventure</MenuItem>
+                        <MenuItem onClick={handleChangeGenre} value="2">Animated</MenuItem>
+                        <MenuItem onClick={handleChangeGenre} value="3">Biographical</MenuItem>
+                        <MenuItem onClick={handleChangeGenre} value="4">Comedy</MenuItem>
+                        <MenuItem onClick={handleChangeGenre} value="5">Disaster</MenuItem>
+                        <MenuItem onClick={handleChangeGenre} value="6">Drama</MenuItem>
+                        <MenuItem onClick={handleChangeGenre} value="7">Epic</MenuItem>
+                        <MenuItem onClick={handleChangeGenre} value="8">Fantasy</MenuItem>
+                        <MenuItem onClick={handleChangeGenre} value="9">Musical</MenuItem>
+                        <MenuItem onClick={handleChangeGenre} value="10">Romantic</MenuItem>
+                        <MenuItem onClick={handleChangeGenre} value="11">Science Fiction</MenuItem>
+                        <MenuItem onClick={handleChangeGenre} value="12">Space-Opera</MenuItem>
+                        <MenuItem onClick={handleChangeGenre} value="13">Superhero</MenuItem>
                     </Menu>
                 </div>
 
-                <Button variant="outlined" color="secondary" onClick={handleCancel}>Cancel</Button>
-                <Button variant="outlined" color="primary" type="submit">Save</Button>
+                <div>
+                    <Button variant="outlined" color="secondary" onClick={handleCancel}>Cancel</Button>
+                    <Button variant="outlined" color="primary" type="submit">Save</Button>
+                </div>
+
             </form>
+
+            <div>
+                <Button variant="outlined" color="primary" onClick={goHome}>Home</Button>
+            </div>
 
         </section>
 
