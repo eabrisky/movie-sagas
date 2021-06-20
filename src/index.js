@@ -19,9 +19,11 @@ function* rootSaga() {
 
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('GET_DETAILS', getDetails);
+    yield takeEvery('ADD_NEW_MOVIE', addMovie);
 
 } // end rootSaga
 
+// GENERATOR FUNCTIONS
 function* fetchAllMovies() {
     // get all movies from the DB
     try {
@@ -37,9 +39,7 @@ function* fetchAllMovies() {
     } // end try
 
     catch {
-
         console.log('get all error');
-
     } // end catch
 
 } // end fetchAllMovies fn*
@@ -64,13 +64,30 @@ function* getDetails(action) {
     } // end try
 
     catch (err) {
-
         console.log('get details error:', err);
-
     } // end catch
 
 } // end getDetails fn*
 
+function* addMovie(action) {
+
+    try {
+
+        console.log(action.payload);
+        yield axios.post('/api/movie', action.payload);
+
+        // get all movies again
+        yield put({ type: 'FETCH_MOVIES'});
+
+    }
+
+    catch (err) {
+        console.log('addMovie error: ', err);
+    } // end catch
+
+} // end addMovie fn*
+
+//REDUCERS
 // Used to store movies returned from the server
 const movies = (state = [], action) => {
 
