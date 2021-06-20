@@ -51,16 +51,15 @@ function* getDetails(action) {
         console.log('(in getDetails fn*) movie received from MovieList dispatch: ', action.payload);
 
         // axios.get for genre
-        // const response = yield axios.get('/api/genre/{action.payload.id}');
-        yield axios.get('/api/genre/:id');
+        const response = yield axios.get(`/api/genre/${action.payload.id}`);
 
-        // console.log('(in getDetails fn*) get details from genre get(response.data):', response.data);
+        console.log('(in getDetails fn*) get details from genre get(response.data):', response.data);
 
         // yield put to genre reducer
-        // yield put({
-        //     type : 'SET_GENRE',
-        //     payload : response.data
-        // }) // end genre yield put
+        yield put({
+            type : 'SET_GENRES',
+            payload : response.data
+        }) // end genre yield put
 
         // yield put to movie reducer
         yield put({
@@ -89,16 +88,16 @@ const movie = (state = [], action) => {
 
 } // end movie reducer
 
-const genre = (state = [], action) => {
+// const genre = (state = [], action) => {
 
-    switch (action.type) {
-        case 'SET_GENRE':
-            return action.payload;
-        default:
-            return state;
-    } // end switch
+//     switch (action.type) {
+//         case 'SET_GENRE':
+//             return action.payload;
+//         default:
+//             return state;
+//     } // end switch
 
-} // end genre reducer
+// } // end genre reducer
 
 // Used to store movies returned from the server
 const movies = (state = [], action) => {
@@ -129,7 +128,7 @@ const storeInstance = createStore(
 
     combineReducers({
         movie,
-        genre,
+        // genre,
         movies,
         genres
     }),
