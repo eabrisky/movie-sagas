@@ -1,4 +1,6 @@
-// import useState
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { HashRouter as Router, Route, Link } from 'react-router-dom';
 
 // dispatch with a payload to a post route that connects to movie.router.js' router.post
 
@@ -18,28 +20,45 @@
     // bring user to the home/list page
     // which now has the new movie
 
-import { HashRouter as Router, Route, Link } from 'react-router-dom';
-
 function MovieForm() {
+
+    const dispatch = useDispatch();
+
+    const [ newMovie, setNewMovie ] = useState('');
 
     const handleSubmit = () => {
         
         //dispatch to rootSaga with payload of local state (as object)
+        dispatch({
+
+            type: 'ADD_NEW_MOVIE',
+            payload: newMovie
+
+        }) // end dispatch
+        setNewMovie('');
 
     } // end handleSubmit fn
 
     const handleChange = (event) => {
+
         event.preventDefault();
         //change state to event.target.value
-    }
+        setNewMovie(event.target.value);
+
+    } // end handleChange
+
+    const handleCancel = () => {
+        setNewMovie('');
+    } // end handleCancel
 
     return(
 
         <section className="formSection">
 
             <form className="form" onSubmit={handleSubmit}>
-                <input onChange={handleChange} placeholder="movie stuff 🥴" />
-                <button type="submit">Submit</button>
+                <input onChange={handleChange} placeholder="movie stuff 🥴" value={newMovie}/>
+                <button onClick={handleCancel}>Cancel</button>
+                <button type="submit">Save</button>
             </form>
 
         </section>
